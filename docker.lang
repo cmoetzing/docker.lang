@@ -29,6 +29,10 @@
         <style id="docker-keyword" _name="Docker Keyword" map-to="def:keyword"/>
         <style id="docker-comment" _name="Comment" map-to="def:comment"/>
         <style id="docker-string" _name="String" map-to="def:string"/>
+	<style id="docker-identifier" _name="Identifier" map-to="def:identifier"/>
+	<style id="docker-constant" _name="Constant" map-to="def:constant"/>
+	<style id="docker-constant-value" _name="Constant Value" map-to="def:string"/>
+        <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
     </styles>
  
     <definitions>
@@ -47,11 +51,13 @@
             <keyword>ONBUILD</keyword>
             <keyword>WORKDIR</keyword>
         </context>
-        <context id="comment" end-at-line-end="true" style-ref="docker-comment">
+
+        <context id="comment" style-ref="docker-comment">
           <start>#</start>
           <end>$</end>
         </context>
-        <context id="string" end-at-line-end="true" style-ref="docker-string">
+
+        <context id="string" style-ref="docker-string">
           <start>"</start>
           <end>"</end>
           <include>
@@ -61,11 +67,26 @@
           </include>
         </context>
         
+        <context id="identifier" style-ref="docker-identifier">
+          <start>\${</start>
+          <end>}</end>
+        </context>
+
+        <context id="constant">
+          <match>\b([A-Z0-9-_]+)[ \t]+(.+)</match>
+	  <include>
+	    <context sub-pattern="1" id="constant-identifier" style-ref="docker-constant"/>
+            <context sub-pattern="2" id="constant-value" style-ref="docker-constant-value"/>
+          </include>
+        </context>
+
         <context id="docker">
             <include>
                 <context ref="keywords"/>
                 <context ref="comment"/>
                 <context ref="string"/>
+		<context ref="identifier"/>
+		<context ref="constant"/>
             </include>
         </context>
     </definitions>
