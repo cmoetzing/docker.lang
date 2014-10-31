@@ -20,74 +20,86 @@
  
 -->
 <language id="docker" _name="Dockerfile" version="2.0" _section="Scripts">
-    <metadata>
-        <property name="mimetypes">application/docker;text/docker</property>
-        <property name="globs">Dockerfile</property>
-    </metadata>
+  <metadata>
+    <property name="mimetypes">application/docker;text/docker</property>
+    <property name="globs">Dockerfile</property>
+  </metadata>
  
-    <styles>
-        <style id="docker-keyword" _name="Docker Keyword" map-to="def:keyword"/>
-        <style id="docker-comment" _name="Comment" map-to="def:comment"/>
-        <style id="docker-string" _name="String" map-to="def:string"/>
-	<style id="docker-identifier" _name="Identifier" map-to="def:identifier"/>
-	<style id="docker-constant" _name="Constant" map-to="def:constant"/>
-	<style id="docker-constant-value" _name="Constant Value" map-to="def:string"/>
-        <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
-    </styles>
+  <styles>
+    <style id="docker-keyword" _name="Docker Keyword" map-to="def:keyword"/>
+    <style id="docker-comment" _name="Comment" map-to="def:comment"/>
+    <style id="docker-string" _name="String" map-to="def:string"/>
+    <style id="docker-identifier" _name="Identifier" map-to="def:identifier"/>
+    <style id="docker-constant" _name="Constant" map-to="def:constant"/>
+    <style id="docker-constant-value" _name="Constant Value" map-to="def:string"/>
+    <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
+    <style id="docker-char" _name="Character" map-to="def:character"/>
+    <style id="docker-number" _name="Number" map-to="def:decimal"/>
+  </styles>
  
-    <definitions>
-        <context id="keywords" style-ref="docker-keyword">
-            <keyword>FROM</keyword>
-            <keyword>MAINTAINER</keyword>
-            <keyword>RUN</keyword>
-            <keyword>ADD</keyword>
-            <keyword>COPY</keyword>
-            <keyword>CMD</keyword>
-            <keyword>ENTRYPOINT</keyword>
-            <keyword>EXPOSE</keyword>
-            <keyword>ENV</keyword>
-            <keyword>VOLUME</keyword>
-            <keyword>USER</keyword>
-            <keyword>ONBUILD</keyword>
-            <keyword>WORKDIR</keyword>
-        </context>
+  <definitions>
+    <context id="keywords" style-ref="docker-keyword">
+      <keyword>FROM</keyword>
+      <keyword>MAINTAINER</keyword>
+      <keyword>RUN</keyword>
+      <keyword>ADD</keyword>
+      <keyword>COPY</keyword>
+      <keyword>CMD</keyword>
+      <keyword>ENTRYPOINT</keyword>
+      <keyword>EXPOSE</keyword>
+      <keyword>ENV</keyword>
+      <keyword>VOLUME</keyword>
+      <keyword>USER</keyword>
+      <keyword>ONBUILD</keyword>
+      <keyword>WORKDIR</keyword>
+    </context>
 
-        <context id="comment" style-ref="docker-comment">
-          <start>#</start>
-          <end>$</end>
-        </context>
+    <context id="comment" style-ref="docker-comment">
+      <start>#</start>
+      <end>$</end>
+    </context>
 
-        <context id="string" style-ref="docker-string">
-          <start>"</start>
-          <end>"</end>
-          <include>
-            <context id="escape" style-ref="escaped-character">
-              <match>\\.</match>
-            </context>
-          </include>
+    <context id="string" style-ref="docker-string">
+      <start>"</start>
+      <end>"</end>
+      <include>
+        <context id="escape" style-ref="escaped-character">
+          <match>\\.</match>
         </context>
-        
-        <context id="identifier" style-ref="docker-identifier">
-          <start>\${</start>
-          <end>}</end>
-        </context>
+      </include>
+    </context>
 
-        <context id="constant">
-          <match>\b([A-Z0-9-_]+)[ \t]+(.+)</match>
-	  <include>
-	    <context sub-pattern="1" id="constant-identifier" style-ref="docker-constant"/>
-            <context sub-pattern="2" id="constant-value" style-ref="docker-constant-value"/>
-          </include>
-        </context>
+    <context id="char" style-ref="docker-char">
+      <match>'.*'</match>
+    </context>
+    
+    <context id="identifier" style-ref="docker-identifier">
+      <start>\${</start>
+      <end>}</end>
+    </context>
 
-        <context id="docker">
-            <include>
-                <context ref="keywords"/>
-                <context ref="comment"/>
-                <context ref="string"/>
-		<context ref="identifier"/>
-		<context ref="constant"/>
-            </include>
-        </context>
-    </definitions>
+    <context id="constant">
+      <match>\b([A-Z0-9-_]+)[ \t]+(.+)</match>
+      <include>
+        <context sub-pattern="1" id="constant-identifier" style-ref="docker-constant"/>
+          <context sub-pattern="2" id="constant-value" style-ref="docker-constant-value"/>
+      </include>
+    </context>
+
+    <context id="number" style-ref="docker-number">
+      <match extended="true">\b([0-9]+|0[xX][0-9a-fA-F]+)($|\b)</match>
+    </context>
+
+    <context id="docker">
+      <include>
+        <context ref="keywords"/>
+        <context ref="comment"/>
+        <context ref="string"/>
+        <context ref="char"/>
+        <context ref="identifier"/>
+        <context ref="constant"/>
+        <context ref="number"/>
+      </include>
+    </context>
+  </definitions>
 </language>

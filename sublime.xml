@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ This file is part of GtkSourceView
+
+ Copyright (C) 2007 GtkSourceView team
+ Author: Paolo Borelli <pborelli@gnome.org>
+
+ GtkSourceView is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ GtkSourceView is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+-->
+
+<style-scheme id="sublime" _name="Sublime" version="1.0">
+
+  <author>Christian Mötzing</author>
+  <_description>Dark color scheme similar to sublime test editor.</_description>
+  
+  <!-- Colors -->
+  <color name="foreground" value="#CFBFAD" />
+  <color name="background" value="#272822" />
+
+  <!-- Common -->
+  <style name="text"            foreground="foreground" background="background"/>
+  <style name="selection"       foreground="#404040" background="#CC9900"/>
+  <style name="cursor"          foreground="foreground"/>
+  <style name="current-line"    background="#5B5A4E"/>
+  <style name="line-numbers"    foreground="#999999" background="background"/>
+  <style name="draw-spaces"     foreground="foreground"/>
+
+  <!-- Comment defaults -->
+  <style name="def:comment"                 foreground="#FFFFFF"/>
+  <style name="def:shebang"                 foreground="#FFFFFF" bold="true"/>
+  <style name="def:doc-comment-element"     italic="true"/>
+
+  <!-- Lanuage defaults -->
+  <style name="def:decimal"     foreground="#C48CFF"/>
+  <style name="def:string"      foreground="#ECE47E"/>
+  <style name="def:char"        foreground="#ECD728"/>
+  <style name="def:character"   foreground="#ECD728"/>
+  <style name="def:type"        foreground="#52E3F6" bold="true"/> 
+  <style name="def:identifier"  foreground="#79ABFF"/>
+  <style name="def:statement"   foreground="#FF007F" bold="true"/>
+
+  <!-- Matching -->
+  <style name="bracket-match"     foreground="#F9FAF4" bold="true"/>
+  <style name="bracket-mismatch"  foreground="#FF0000" bold="true"/>
+  <style name="search-match"      foreground="#4444CC"/>
+
+  <!-- Right Margin -->
+  <style name="right-margin"    foreground="foreground" background="background"/>
+
+  <!-- Constants -->
+  <style name="def:constant"                foreground="#52E3F6"/>
+  <style name="def:special-char"            foreground="#79ABFF"/>
+  <style name="def:special-constant"        foreground="#BED6FF"/>
+  <style name="def:floating-point"          foreground="#FF007F"/>
+
+  <!-- Language specific 
+  Others
+  <style name="def:preprocessor"            foreground="plum1"/>
+  <style name="def:error"                   foreground="aluminium1" background="scarletred2" bold="true"/>
+  <style name="def:warning"                 foreground="aluminium1" background="plum1"/>
+  <style name="def:note"                    background="butter1" foreground="aluminium4" bold="true"/>
+  <style name="def:underlined"              italic="true" underline="true"/>
+ 
+  <style name="diff:added-line"             foreground="butter2"/>
+  <style name="diff:removed-line"           foreground="skyblue1"/>
+  <style name="diff:changed-line"           foreground="plum1"/>
+  <style name="diff:diff-file"              foreground="chameleon1" bold="true"/> 
+  <style name="diff:location"               foreground="chameleon1"/> 
+  <style name="diff:special-case"           foreground="white" bold="true"/>
+
+  <style name="latex:display-math"          foreground="plum3"/>
+  <style name="latex:command"               foreground="chameleon1" bold="true"/>
+  <style name="latex:include"               use-style="def:preprocessor"/>
+  -->
+</style-scheme>
+
